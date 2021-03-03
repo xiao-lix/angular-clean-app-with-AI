@@ -15,7 +15,7 @@ import { ShippingComponent } from './shipping/shipping.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -23,7 +23,8 @@ import { ShippingComponent } from './shipping/shipping.component';
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
-    ])
+    ]),
+    RouterModule
   ],
   declarations: [
     AppComponent,
