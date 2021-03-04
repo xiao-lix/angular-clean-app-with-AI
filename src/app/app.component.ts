@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { Router } from '@angular/router';
@@ -10,10 +10,11 @@ import { NgZone } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  appInsights: ApplicationInsights;
   constructor(private router: Router, private ngZone: NgZone){
     const angularPlugin = new AngularPlugin();
-    const appInsights = new ApplicationInsights({ config: {
-      instrumentationKey: '63969e7a-c5f7-4494-96f8-a33184d0fe30',
+    this.appInsights = new ApplicationInsights({ config: {
+      instrumentationKey: '<YOUR_IKEY>',
       disableFlushOnBeforeUnload: true,
       disableFlushOnUnload: true,
       extensions: [angularPlugin],
@@ -24,10 +25,9 @@ export class AppComponent {
       }
     } });
     this.ngZone.runOutsideAngular(() => {
-      appInsights.loadAppInsights();
+      this.appInsights.loadAppInsights();
     });
-    // console.log(appInsights.config.connectionString);
-    // throw new Error('123');
-    // appInsights.loadAppInsights();
+
+    this.appInsights.trackEvent({name: 'name123'});
   }
 }
