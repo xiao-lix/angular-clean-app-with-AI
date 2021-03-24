@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { Router } from '@angular/router';
 import { NgZone } from '@angular/core';
 
@@ -11,10 +11,10 @@ import { NgZone } from '@angular/core';
 })
 export class AppComponent {
   appInsights: ApplicationInsights;
-  constructor(private router: Router, private ngZone: NgZone, private errorService: ApplicationinsightsAngularpluginErrorService){
-    const angularPlugin = new AngularPlugin(errorService);
+  constructor(private router: Router, private ngZone: NgZone){
+    const angularPlugin = new AngularPlugin();
     this.appInsights = new ApplicationInsights({ config: {
-      instrumentationKey: '519a0443-db9f-4a3d-8e90-8f293e4d3de8',
+      instrumentationKey: '<YOUR_IKEY>',
       disableFlushOnBeforeUnload: true,
       disableFlushOnUnload: true,
       extensions: [angularPlugin],
