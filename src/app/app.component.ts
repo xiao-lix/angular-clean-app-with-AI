@@ -24,10 +24,10 @@ export class AppComponent {
         }
       }
     } });
-    this.appInsights.loadAppInsights();
-    // this.ngZone.runOutsideAngular(() => {
-    //   this.appInsights.loadAppInsights();
-    // });
+    // this.appInsights.loadAppInsights();
+    this.ngZone.runOutsideAngular(() => {
+      this.appInsights.loadAppInsights();
+    });
 
     // this.appInsights.trackEvent({name: 'name123'});
   }
