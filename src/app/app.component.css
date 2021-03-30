@@ -9,3 +9,7 @@ button {
     display: inline-block;
     font-size: 16px;
 }
+
+.dependencyButton {
+    background-color: #ff907d; /* Pink */
+}

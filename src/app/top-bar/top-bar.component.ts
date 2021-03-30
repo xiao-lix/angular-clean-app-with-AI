@@ -5,11 +5,11 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.css']
 })
-export class TopBarComponent implements OnInit{
-  @Input() appInsights: ApplicationInsights;
+export class TopBarComponent {
+  // @Input() appInsights: ApplicationInsights;
 
-  ngOnInit() {
-    console.log(this.appInsights);
-    this.appInsights.trackEvent({name: 'test event inside top bar component'});
-  }
+  // ngOnInit() {
+  //   console.log(this.appInsights);
+  //   this.appInsights.trackEvent({name: 'test event inside top bar component'});
+  // }
 }

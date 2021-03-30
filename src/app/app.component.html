@@ -1,8 +1,11 @@
-<app-top-bar [appInsights]="appInsights"></app-top-bar>
+<app-top-bar></app-top-bar>
 
 <div class="container">
 
   <div>
+    <button class="dependencyButton" (click)="triggerDependencies()">
+      Trigger dependencies
+    </button>
     <button (click)="normalError()">
     Fire Normal Error
     </button>
@@ -10,7 +13,6 @@
     <button (click)="errorWithCatch()">
     Fire Error With Try Catch
     </button>
-    </div>
-    
+  </div>
   <router-outlet></router-outlet>
 </div>
