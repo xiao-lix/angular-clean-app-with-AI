@@ -25,11 +25,25 @@ export class AppComponent {
         }
       }
     } });
+    // this.appInsights.loadAppInsights();
     this.ngZone.runOutsideAngular(() => {
       this.appInsights.loadAppInsights();
     });
 
-    this.appInsights.trackEvent({name: 'name123'});
+    // this.appInsights.trackEvent({name: 'name123'});
+  }
+
+  normalError() {
+    throw new Error('This is normal error without a try catch');
+  }
+
+  errorWithCatch() {
+    try {
+      throw new Error('This is an error with a try catch');
+    } catch (error) {
+      console.log(' — Error is handled gracefully: ', error.name);
+    }
+    console.log(' — Execution continues without app breaking');
   }
 
   //https://coryrylan.com/blog/angular-multiple-http-requests-with-rxjs
