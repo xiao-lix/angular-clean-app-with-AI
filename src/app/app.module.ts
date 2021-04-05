@@ -13,7 +13,6 @@ import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 
 import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
-// import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 
 @NgModule({
   imports: [
