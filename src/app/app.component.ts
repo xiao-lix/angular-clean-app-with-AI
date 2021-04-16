@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { ApplicationInsights, DistributedTracingModes } from '@microsoft/applicationinsights-web';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { Router } from '@angular/router';
 import { NgZone } from '@angular/core';
@@ -25,12 +25,10 @@ export class AppComponent {
         }
       }
     } });
-    // this.appInsights.loadAppInsights();
+
     this.ngZone.runOutsideAngular(() => {
       this.appInsights.loadAppInsights();
     });
-
-    // this.appInsights.trackEvent({name: 'name123'});
   }
 
   normalError() {
@@ -47,6 +45,7 @@ export class AppComponent {
   }
 
   //https://coryrylan.com/blog/angular-multiple-http-requests-with-rxjs
+  //https://rapidapi.com/Gramzivi/api/covid-19-data
   triggerDependencies() {
     this.http.get('https://api.first.org/data/v1/countries?region=Europe').subscribe((response: any) => {
       console.log(response);
@@ -60,8 +59,34 @@ export class AppComponent {
               "x-rapidapi-host": "covid-19-data.p.rapidapi.com"
             }
           }).subscribe(data => {
-            console.log('Get COVID data for ' + name);
+            console.log('AJAX Get COVID data for ' + name);
             console.log(data);
+          });
+        }, i * 1500);
+      }
+    });
+  }
+
+  triggerDependenciesWithFetch() {
+    this.http.get('https://api.first.org/data/v1/countries?region=Europe').subscribe((response: any) => {
+      console.log(response);
+      for (let i = 0; i < 5; i++) {
+        const countryCode = Object.keys(response.data).slice(0, 5)[i];
+        const name = response.data[countryCode].country;
+        setTimeout(() => {
+          fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date=2020-04-01&name=" + name, {
+                "method": "GET",
+                "headers": {
+                  "x-rapidapi-key": "<rapidapi-key>",
+                  "x-rapidapi-host": "covid-19-data.p.rapidapi.com"
+            }
+          })
+          .then(res => {
+            console.log('FETCH Get COVID data for ' + name);
+            console.log(res);
+          })
+          .catch(err => {
+            console.error(err);
           });
         }, i * 1500);
       }

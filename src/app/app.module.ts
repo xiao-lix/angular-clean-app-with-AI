@@ -11,8 +11,7 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
-
-import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+import { GlobalErrorHandler } from './GlogalErrorHandler';
 
 @NgModule({
   imports: [
@@ -39,7 +38,7 @@ import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applica
   providers: [
     {
       provide: ErrorHandler,
-      useClass: ApplicationinsightsAngularpluginErrorService
+      useClass: GlobalErrorHandler,
     }
   ],
   bootstrap: [
