@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private router: Router, private ngZone: NgZone, private http: HttpClient){
     const angularPlugin = new AngularPlugin();
     this.appInsights = new ApplicationInsights({ config: {
-      instrumentationKey: '<YOUR_IKEY>',
+      instrumentationKey: '1fa60e21-a7f6-44d2-9dae-e53b6f00111e',
       disableFlushOnBeforeUnload: true,
       disableFlushOnUnload: true,
       extensions: [angularPlugin],
