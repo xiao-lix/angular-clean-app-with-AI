@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,9 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
-import { GlobalErrorHandler } from './GlogalErrorHandler';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
+import { RandomService } from './random.service';
 
 @NgModule({
   imports: [
@@ -37,8 +39,9 @@ import { GlobalErrorHandler } from './GlogalErrorHandler';
   ],
   providers: [
     {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler,
+      provide: ApplicationInsights,
+      useFactory: (randomService: RandomService) => () => randomService.appInsightsFactory(),
+      deps: [RandomService]
     }
   ],
   bootstrap: [

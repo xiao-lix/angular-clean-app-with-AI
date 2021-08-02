@@ -1,9 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ApplicationInsights, DistributedTracingModes } from '@microsoft/applicationinsights-web';
-import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
-import { Router } from '@angular/router';
-import { NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RandomService } from './random.service';
 
 @Component({
   selector: 'app-root',
@@ -11,24 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  appInsights: ApplicationInsights;
-  constructor(private router: Router, private ngZone: NgZone, private http: HttpClient){
-    const angularPlugin = new AngularPlugin();
-    this.appInsights = new ApplicationInsights({ config: {
-      instrumentationKey: '1fa60e21-a7f6-44d2-9dae-e53b6f00111e',
-      disableFlushOnBeforeUnload: true,
-      disableFlushOnUnload: true,
-      extensions: [angularPlugin],
-      extensionConfig: {
-        [angularPlugin.identifier]: {
-          router: this.router
-        }
-      }
-    } });
-
-    this.ngZone.runOutsideAngular(() => {
-      this.appInsights.loadAppInsights();
-    });
+  constructor(private http: HttpClient, private randomService: RandomService) {
+    randomService.appInsightsFactory();
   }
 
   normalError() {
